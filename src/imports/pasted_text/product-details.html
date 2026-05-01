@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WMS - Product Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script>
+      // Non-blue, neutral-warm dark scale + amber primary
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              dark: {
+                950: "#0D0D0D",
+                900: "#141414",
+                850: "#191919",
+                800: "#1E1E1E",
+                700: "#2C2C2C",
+                600: "#3E3E3E",
+                500: "#595959",
+                400: "#7C7C7C",
+              },
+              // Primary is amber (not blue)
+              primary: "#00D5C0",
+              success: "#22C55E",   // emerald
+              warning: "#FACC15",   // yellow
+              danger:  "#EF4444",   // red
+            },
+            fontFamily: {
+              sans: ["Roboto", "Inter"],
+            },
+            boxShadow: {
+              card: "0 1px 0 0 rgba(255,255,255,0.04) inset, 0 10px 20px rgba(0,0,0,0.35)",
+              focus: "0 0 0 3px rgba(245,158,11,0.35)", // amber glow
+            },
+            borderRadius: {
+              xl2: "1rem",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+      html { color-scheme: dark; }
+      body { font-family: "Roboto", Inter; }
+
+      /* Warm neutral scrollbar */
+      .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+      .custom-scrollbar::-webkit-scrollbar-track { background: #191919; }
+      .custom-scrollbar::-webkit-scrollbar-thumb { background: #3E3E3E; border-radius: 3px; }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #595959; }
+    </style>
+  </head>
+
+  <body class="bg-dark-900 text-gray-100">
+    <div class="flex h-screen overflow-hidden">
+      <!-- Sidebar -->
+      <div class="w-64 bg-dark-800 shadow-lg flex-shrink-0">
+        <div class="p-4 flex-center"> <img src="../samplecard/images/logoDW.svg">
+        <!-- <div class="p-4 border-b border-dark-600">
+           <h1 class="text-xl font-semibold tracking-tight">DOCKINGWARE</h1> -->
+        </div>
+
+        <div class="p-4 space-y-1">
+          <div class="text-xs uppercase text-gray-400 tracking-wider mb-2 px-2">
+            Main Menu
+          </div>
+
+          <div class="space-y-1">
+            <a
+              href="#"
+              class="flex items-center gap-3 px-3 py-2 rounded-lg bg-dark-700 text-white"
+            >
+              <i class="fas fa-tachometer-alt w-5 text-center"></i>
+              <span>Dashboard</span>
+            </a>
+
+            <div class="mt-4 space-y-1">
+              <div class="text-xs uppercase text-gray-400 tracking-wider mb-2 px-2">
+                Inventory
+              </div>
+
+              <a
+                href="#"
+                class="flex items-center gap-3 px-3 py-2 rounded-lg bg-dark-700 text-white"
+              >
+                <i class="fas fa-boxes w-5 text-center"></i>
+                <span>Inventory</span>
+              </a>
+
+              <a
+                href="#"
+                class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-300 hover:bg-dark-700"
+              >
+                <i class="fas fa-box-open w-5 text-center"></i>
+                <span>Products</span>
+              </a>
+
+              <a
+                href="#"
+                class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-300 hover:bg-dark-700 ml-8"
+              >
+                <i class="fas fa-list w-5 text-center"></i>
+                <span>Products List</span>
+              </a>
+
+              <a
+                href="#"
+                class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-300 hover:bg-dark-700"
+              >
+                <i class="fas fa-barcode w-5 text-center"></i>
+                <span>Asset Tracking</span>
+              </a>
+
+              <a
+                href="#"
+                class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-300 hover:bg-dark-700 ml-8"
+              >
+                <i class="fas fa-exchange-alt w-5 text-center"></i>
+                <span>Transfer</span>
+              </a>
+
+              <a
+                href="#"
+                class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-300 hover:bg-dark-700 ml-8"
+              >
+                <i class="fas fa-adjust w-5 text-center"></i>
+                <span>Inv Adjustment</span>
+              </a>
+
+              <a
+                href="#"
+                class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-300 hover:bg-dark-700 ml-8"
+              >
+                <i class="fas fa-cog w-5 text-center"></i>
+                <span>Other Setting</span>
+              </a>
+            </div>
+
+            <div class="mt-4 space-y-1">
+              <div class="text-xs uppercase text-gray-400 tracking-wider mb-2 px-2">
+                Sales
+              </div>
+              <a
+                href="#"
+                class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-300 hover:bg-dark-700"
+              >
+                <i class="fas fa-shopping-cart w-5 text-center"></i>
+                <span>Sales</span>
+              </a>
+            </div>
+
+            <div class="mt-4 space-y-1">
+              <div class="text-xs uppercase text-gray-400 tracking-wider mb-2 px-2">
+                Purchase
+              </div>
+              <a
+                href="#"
+                class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-300 hover:bg-dark-700"
+              >
+                <i class="fas fa-shopping-bag w-5 text-center"></i>
+                <span>Purchase</span>
+              </a>
+
+              <a
+                href="#"
+                class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-300 hover:bg-dark-700 ml-8"
+              >
+                <i class="fas fa-dolly w-5 text-center"></i>
+                <span>Receiving</span>
+              </a>
+
+              <a
+                href="#"
+                class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-300 hover:bg-dark-700 ml-8"
+              >
+                <i class="fas fa-shipping-fast w-5 text-center"></i>
+                <span>Shipping</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="flex-1 flex flex-col overflow-hidden">
+        <!-- Top Bar -->
+        <div class="bg-dark-800 border-b border-dark-600 p-4 flex justify-between items-center">
+          <div>
+            <div class="text-sm text-gray-400">
+              <span class="hover:text-primary cursor-pointer">Home</span> >
+              <span class="hover:text-primary cursor-pointer">Inventory</span> >
+              <span class="text-primary font-medium">Products</span>
+            </div>
+            <h1 class="text-2xl font-semibold mt-1 flex items-center gap-2">
+              <i class="fas fa-box text-primary"></i>
+              Product Details
+            </h1>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <div class="text-sm">
+              <span class="text-gray-400">Welcome,</span>
+              <span class="font-medium">Admin</span>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button
+                class="relative w-10 h-10 rounded-full bg-dark-700 flex items-center justify-center hover:bg-dark-600 focus:outline-none focus:shadow-focus"
+              >
+                <i class="fas fa-bell"></i>
+                <span class="absolute top-2 right-2 w-2 h-2 bg-danger rounded-full border border-dark-900"></span>
+              </button>
+
+              <button
+                class="w-10 h-10 rounded-full bg-dark-700 flex items-center justify-center hover:bg-dark-600 focus:outline-none focus:shadow-focus"
+              >
+                <i class="fas fa-envelope"></i>
+              </button>
+
+              <div class="w-10 h-10 rounded-full bg-dark-700 flex items-center justify-center">
+                <i class="fas fa-user"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="bg-dark-800 border-b border-dark-600 px-4 overflow-x-auto custom-scrollbar">
+          <div class="flex space-x-1 min-w-max">
+            <button class="px-4 py-3 text-sm font-medium border-b-2 border-primary text-primary bg-dark-700/50">
+              <i class="fas fa-warehouse mr-2"></i>
+              Inventory
+            </button>
+            <button class="px-4 py-3 text-sm font-medium text-gray-400 hover:text-white hover:bg-dark-700/30">
+              <i class="fas fa-info-circle mr-2"></i>
+              Item Details
+            </button>
+            <button class="px-4 py-3 text-sm font-medium text-gray-400 hover:text-white hover:bg-dark-700/30">
+              <i class="fas fa-shopping-cart mr-2"></i>
+              Sales Orders
+            </button>
+            <button class="px-4 py-3 text-sm font-medium text-gray-400 hover:text-white hover:bg-dark-700/30">
+              <i class="fas fa-truck mr-2"></i>
+              Supplier
+            </button>
+            <button class="px-4 py-3 text-sm font-medium text-gray-400 hover:text-white hover:bg-dark-700/30">
+              <i class="fas fa-shopping-bag mr-2"></i>
+              Purchases
+            </button>
+            <button class="px-4 py-3 text-sm font-medium text-gray-400 hover:text-white hover:bg-dark-700/30">
+              <i class="fas fa-dolly mr-2"></i>
+              Receiving
+            </button>
+            <button class="px-4 py-3 text-sm font-medium text-gray-400 hover:text-white hover:bg-dark-700/30">
+              <i class="fas fa-map-marked-alt mr-2"></i>
+              Inventory Tracking
+            </button>
+            <button class="px-4 py-3 text-sm font-medium text-gray-400 hover:text-white hover:bg-dark-700/30">
+              <i class="fas fa-shipping-fast mr-2"></i>
+              Shipping
+            </button>
+            <button class="px-4 py-3 text-sm font-medium text-gray-400 hover:text-white hover:bg-dark-700/30">
+              <i class="fas fa-calculator mr-2"></i>
+              Accounting
+            </button>
+          </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="flex-1 overflow-auto p-4 custom-scrollbar">
+          <!-- Search and Actions -->
+          <div class="flex justify-between items-center mb-4 gap-4 flex-wrap">
+            <div class="flex-1 max-w-2xl">
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <i class="fas fa-search text-gray-500"></i>
+                </div>
+                <input
+                  type="text"
+                  class="bg-dark-700 border border-dark-600 text-white text-sm rounded-lg focus:outline-none focus:shadow-focus block w-full pl-10 p-2.5"
+                  placeholder="Search by Item, name, SKU..."
+                />
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <div class="flex items-center gap-1 text-sm text-gray-400">
+                <button class="w-8 h-8 flex items-center justify-center bg-dark-700 rounded hover:bg-dark-600">
+                  <i class="fas fa-angle-left"></i>
+                </button>
+                <span>1</span>
+                <span>of</span>
+                <span>160</span>
+                <button class="w-8 h-8 flex items-center justify-center bg-dark-700 rounded hover:bg-dark-600">
+                  <i class="fas fa-angle-right"></i>
+                </button>
+              </div>
+
+              <button class="px-4 py-2 bg-primary hover:bg-primary/90 text-black rounded-lg text-sm font-medium flex items-center gap-2">
+                <i class="fas fa-save"></i>
+                Save
+              </button>
+
+              <button class="px-4 py-2 bg-dark-700 hover:bg-dark-600 text-white rounded-lg text-sm font-medium flex items-center gap-2">
+                <i class="fas fa-edit"></i>
+                Edit
+              </button>
+
+              <button class="px-4 py-2 bg-dark-700 hover:bg-dark-600 text-white rounded-lg text-sm font-medium flex items-center gap-2">
+                <i class="fas fa-print"></i>
+                Print
+              </button>
+
+              <button class="px-4 py-2 bg-dark-700 hover:bg-dark-600 text-white rounded-lg text-sm font-medium flex items-center gap-2">
+                <i class="fas fa-file-export"></i>
+                Report
+              </button>
+
+              <div class="flex items-center gap-1 bg-dark-700 px-3 py-1 rounded-full border border-dark-600">
+                <div class="w-3 h-3 bg-success rounded-full"></div>
+                <span class="text-sm">Active</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product Content -->
+          <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
+            <!-- Left Column - Product Image and Basic Info -->
+            <div class="lg:col-span-1 space-y-4">
+              <!-- Product Image -->
+              <div class="bg-dark-700 border border-dark-600 rounded-lg p-4 flex justify-center">
+                <img
+                  src="images/batteries.jpg"
+                  alt="Product"
+                  class="w-full max-w-xs object-contain"
+                />
+              </div>
+
+              <!-- Basic Info Card -->
+              <div class="bg-dark-700 border border-dark-600 rounded-lg p-4 shadow-card">
+                <h3 class="font-medium text-lg mb-3 flex items-center gap-2">
+                  <i class="fas fa-info-circle text-primary"></i>
+                  Basic Information
+                </h3>
+
+                <div class="space-y-3 text-sm">
+                  <div class="flex justify-between"><span class="text-gray-400">SKU#</span><span>DUR-AA2</span></div>
+                  <div class="flex justify-between"><span class="text-gray-400">Item#</span><span>DURAA2-01</span></div>
+                  <div class="flex justify-between"><span class="text-gray-400">Vendor Item#</span><span>NK-23300-SRT</span></div>
+                  <div class="flex justify-between"><span class="text-gray-400">Barcode Inner#</span><span>881982829389</span></div>
+                  <div class="flex justify-between"><span class="text-gray-400">Barcode Pack#</span><span>847385993785</span></div>
+                  <div class="flex justify-between"><span class="text-gray-400">Barcode UPC#</span><span>859873859388</span></div>
+                </div>
+              </div>
+
+              <!-- Market Places -->
+              <div class="bg-dark-700 border border-dark-600 rounded-lg p-4">
+                <h3 class="font-medium text-gray-300 mb-3">Market Places</h3>
+                <div class="flex gap-3">
+                  <div class="w-10 h-10 bg-dark-600 rounded-full flex items-center justify-center border border-dark-500">
+                    <i class="fab fa-amazon"></i>
+                  </div>
+                  <div class="w-10 h-10 bg-dark-600 rounded-full flex items-center justify-center border border-dark-500">
+                    <i class="fab fa-ebay"></i>
+                  </div>
+                  <div class="w-10 h-10 bg-dark-600 rounded-full flex items-center justify-center border border-dark-500">
+                    <i class="fab fa-shopify"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column - Product Details -->
+            <div class="lg:col-span-3 space-y-4">
+              <div class="border border-dark-600 rounded-lg p-4">
+                <h3 class="font-medium text-lg mb-3 flex items-center gap-2 "> Stock </h3>
+             
+              <!-- Inventory Status Cards (no blue/cyan) -->
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
+               
+                <div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+                  <div class="text-success font-medium">On Hand</div>
+                  <div class="text-sm text-success">13,500 pcs</div>
+                  <div class="text-xs text-success mt-1">5,000 cases</div>
+                </div>
+                <div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+                  <div class="text-warning font-medium">On Orders</div>
+                  <div class="text-sm text-warning">2,500 pcs</div>
+                  <div class="text-xs text-warning mt-1">50 cases</div>
+                </div>
+                <div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+                  <div class="text-warning font-medium">On Way</div>
+                  <div class="text-sm text-warning">22,500 pcs</div>
+                  <div class="text-xs text-warning mt-1">2,500 cases</div>
+                </div>
+                <div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+                  <div class="text-amber-300 font-medium">On Storage</div>
+                  <div class="text-sm text-amber-300">59,000 pcs</div>
+                  <div class="text-xs text-amber-300 mt-1">1,211 cases</div>
+                </div>
+                <div class="bg-dark-800 border border-dark-600 rounded-lg p-3 text-center">
+                  <div class="text-emerald-300 font-medium">MultiWarehouse</div>
+                  <div class="text-sm text-emerald-300">265,000 pcs</div>
+                  <div class="text-xs text-emerald-300 mt-1">35,000 cases</div>
+                </div>
+                 </div>
+              </div>
+            
+              <!-- Description and Pricing -->
+              <div class="border border-dark-600 rounded-lg p-4">
+                <h1 class="font-medium text-lg mb-3 flex items-center gap-2"> Product Details </h1>
+              
+              <div class="bg-dark-700 border border-dark-600 rounded-lg p-4 shadow-card">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  <div class="md:col-span-2">
+                    <div class="text-gray-400 text-sm">Description:</div>
+                    <div>Batteries Alkaline AA2, Pack 2 B</div>
+                  </div>
+                  <div>
+                    <div class="text-gray-400 text-sm">Price Retail:</div>
+                    <div>$ 0.50</div>
+                  </div>
+                  <div>
+                    <div class="text-gray-400 text-sm">Price WholeSale:</div>
+                    <div>$ 0.80</div>
+                  </div>
+                </div>
+              </div>
+             
+
+              <!-- Product Details Sections -->
+              <div class="space-y-3 pt-3">
+                <!-- Unit Details -->
+                <div class="bg-dark-700 border border-dark-600 rounded-lg overflow-hidden">
+                  <div class="grid grid-cols-12">
+                    <div class="col-span-12 md:col-span-2 bg-dark-800 p-3 flex items-center">
+                      <h3 class="font-medium">Unit Details</h3>
+                    </div>
+                    <div class="col-span-12 md:col-span-10 p-3">
+                      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div><div class="text-gray-400 text-sm">Master Case:</div><div>10</div></div>
+                        <div><div class="text-gray-400 text-sm">Inner Box:</div><div>4</div></div>
+                        <div><div class="text-gray-400 text-sm">Pieces:</div><div>12</div></div>
+                        <div><div class="text-gray-400 text-sm">Pack:</div><div>120</div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Category -->
+                <div class="bg-dark-700 border border-dark-600 rounded-lg overflow-hidden">
+                  <div class="grid grid-cols-12">
+                    <div class="col-span-12 md:col-span-2 bg-dark-800 p-3 flex items-center">
+                      <h3 class="font-medium">Category</h3>
+                    </div>
+                    <div class="col-span-12 md:col-span-10 p-3">
+                      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div><div class="text-gray-400 text-sm">Main Categories:</div><div class="font-medium">Electronic</div></div>
+                        <div><div class="text-gray-400 text-sm">SubCategories:</div><div class="font-medium">Batteries</div></div>
+                        <div><div class="text-gray-400 text-sm">Product Category:</div><div class="font-medium">Alkaline</div></div>
+                        <div><div class="text-gray-400 text-sm">SubCategory:</div><div class="font-medium">AA</div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Brand Name -->
+                <div class="bg-dark-700 border border-dark-600 rounded-lg overflow-hidden">
+                  <div class="grid grid-cols-12">
+                    <div class="col-span-12 md:col-span-2 bg-dark-800 p-3 flex items-center">
+                      <h3 class="font-medium">Brand Name</h3>
+                    </div>
+                    <div class="col-span-12 md:col-span-10 p-3">
+                      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="md:col-span-2"><div class="text-gray-400 text-sm">Brand Name:</div><div>Duracell</div></div>
+                        <div class="md:col-span-2"><div class="text-gray-400 text-sm">SubBrand Name:</div><div>PowerBoost</div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Location -->
+                <div class="bg-dark-700 border border-dark-600 rounded-lg overflow-hidden">
+                  <div class="grid grid-cols-12">
+                    <div class="col-span-12 md:col-span-2 bg-dark-800 p-3 flex items-center">
+                      <h3 class="font-medium">Location</h3>
+                    </div>
+                    <div class="col-span-12 md:col-span-10 p-3">
+                      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div><div class="text-gray-400 text-sm">Aisle Location:</div><div>10</div></div>
+                        <div><div class="text-gray-400 text-sm">Rack Location:</div><div>23</div></div>
+                        <div><div class="text-gray-400 text-sm">Shelf Location:</div><div>3UP</div></div>
+                        <div><div class="text-gray-400 text-sm">Bin Location:</div><div>A22</div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Exp Date -->
+                <div class="bg-dark-700 border border-dark-600 rounded-lg overflow-hidden">
+                  <div class="grid grid-cols-12">
+                    <div class="col-span-12 md:col-span-2 bg-dark-800 p-3 flex items-center">
+                      <h3 class="font-medium">Exp Date</h3>
+                    </div>
+                    <div class="col-span-12 md:col-span-10 p-3">
+                      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div><div class="text-gray-400 text-sm">Exp Date:</div><div class="text-amber-300">Mix</div></div>
+                        <div><div class="text-gray-400 text-sm">Made in:</div><div class="text-amber-300">Mix</div></div>
+                        <div><div class="text-gray-400 text-sm">Lote:</div><div class="text-amber-300">Mix</div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Measuring Details -->
+                <div class="bg-dark-700 border border-dark-600 rounded-lg overflow-hidden">
+                  <div class="grid grid-cols-12">
+                    <div class="col-span-12 md:col-span-2 bg-dark-800 p-3 flex items-center">
+                      <h3 class="font-medium">Measuring Details</h3>
+                    </div>
+                    <div class="col-span-12 md:col-span-10 p-3">
+                      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div><div class="text-gray-400 text-sm">L x W x H</div><div>19x20x6</div></div>
+                        <div><div class="text-gray-400 text-sm">Meas Type:</div><div>Inches</div></div>
+                        <div><div class="text-gray-400 text-sm">Volume CBM / CBF:</div><div>.004</div></div>
+                        <div><div class="text-gray-400 text-sm">Pack Volume Type:</div><div>CBM</div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Weight Details -->
+                <div class="bg-dark-700 border border-dark-600 rounded-lg overflow-hidden">
+                  <div class="grid grid-cols-12">
+                    <div class="col-span-12 md:col-span-2 bg-dark-800 p-3 flex items-center">
+                      <h3 class="font-medium">Weight Details</h3>
+                    </div>
+                    <div class="col-span-12 md:col-span-10 p-3">
+                      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div><div class="text-gray-400 text-sm">Weight:</div><div>6.5</div></div>
+                        <div><div class="text-gray-400 text-sm">Weight Type:</div><div>lb</div></div>
+                        <div><div class="text-gray-400 text-sm">Pallet Total Weight</div><div>255 lb</div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Pallet Stacking -->
+                <div class="bg-dark-700 border border-dark-600 rounded-lg overflow-hidden">
+                  <div class="grid grid-cols-12">
+                    <div class="col-span-12 md:col-span-2 bg-dark-800 p-3 flex items-center">
+                      <h3 class="font-medium">Pallet Stacking</h3>
+                    </div>
+                    <div class="col-span-12 md:col-span-10 p-3">
+                      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div><div class="text-gray-400 text-sm">PLT Type:</div><div>48 x 40</div></div>
+                        <div><div class="text-gray-400 text-sm">Tall:</div><div>4'</div></div>
+                        <div><div class="text-gray-400 text-sm">Load Weight:</div><div>650 lb</div></div>
+                        <div><div class="text-gray-400 text-sm">Load Volume:</div><div>72.09 cu. ft.</div></div>
+                        <div><div class="text-gray-400 text-sm">Cases per Layer:</div><div>13 cs</div></div>
+                        <div><div class="text-gray-400 text-sm">Num of Layers:</div><div>9</div></div>
+                        <div><div class="text-gray-400 text-sm">Total Cs per PLT:</div><div>117</div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div> <!-- /sections -->
+            </div>
+          </div>
+          </div>
+
+          <!-- Pagination -->
+          <div class="mt-4 flex justify-end">
+            <div class="flex items-center gap-2">
+              <button class="w-8 h-8 flex items-center justify-center bg-dark-700 rounded hover:bg-dark-600">
+                <i class="fas fa-angle-left"></i>
+              </button>
+              <span class="text-sm text-gray-400">1</span>
+              <span class="text-sm text-gray-400">of</span>
+              <span class="text-sm text-gray-400">160</span>
+              <button class="w-8 h-8 flex items-center justify-center bg-dark-700 rounded hover:bg-dark-600">
+                <i class="fas fa-angle-right"></i>
+              </button>
+            </div>
+          </div>
+        </div> <!-- /Main content area -->
+      </div>
+    </div>
+  </body>
+</html>
