@@ -1,10 +1,13 @@
 {
-  "name": "@figma/my-make-file",
+  "name": "productdetails",
   "private": true,
   "version": "0.0.1",
   "type": "module",
+  "homepage": "https://quantumpod.github.io/productdetails",
   "scripts": {
-    "build": "vite build"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",
