@@ -14,7 +14,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      CI: false
+      CI: true
       VITE_DEBUG: true
     steps:
       - name: Checkout
